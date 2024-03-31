@@ -14,10 +14,29 @@ public class Move {
     public static final String NONE_ERROR = "[ERROR] source에 기말이 없습니다.";
     private final Location source;
     private final Location target;
+    private Piece piece;
 
     public Move(Location source, Location target) {
         this.source = source;
         this.target = target;
+    }
+
+    private void setPiece(char pieceTxt) {
+        if (Character.toLowerCase(pieceTxt) == Symbol.KING.getName(Team.WHITE)) {
+            this.piece = new King();
+        } else if (Character.toLowerCase(pieceTxt) == Symbol.QUEEN.getName(Team.WHITE)) {
+            this.piece = new Queen();
+        } else if (Character.toLowerCase(pieceTxt) == Symbol.ROOK.getName(Team.WHITE)) {
+            this.piece = new Rook();
+        } else if (Character.toLowerCase(pieceTxt) == Symbol.BISHOP.getName(Team.WHITE)) {
+            this.piece = new Bishop();
+        } else if (Character.toLowerCase(pieceTxt) == Symbol.KNIGHT.getName(Team.WHITE)) {
+            this.piece = new Knight();
+        } else if (Character.toLowerCase(pieceTxt) == Symbol.PAWN.getName(Team.WHITE)) {
+            this.piece = new Pawn();
+        } else {
+            throw new RuntimeException(NONE_ERROR);
+        }
     }
 
     public static boolean isNoPieceOnTheWay(Symbol symbol, Location source, Location target) {
@@ -51,34 +70,18 @@ public class Move {
     }
 
     public void getPiece() {
-        char piece = Checkerboard.NONE;
+        char pieceTxt = Checkerboard.NONE;
         for (Location location : Checkerboard.positions.keySet()) {
             if (location.getLocation().equals(source.getLocation())) {
-                 piece = Checkerboard.positions.get(location);
+                pieceTxt = Checkerboard.positions.get(location);
                  break;
             }
         }
-        if (piece == Checkerboard.NONE) {
-            throw new RuntimeException(NONE_ERROR);
-        } else {
-            checkPiece(piece);
-        }
+        setPiece(pieceTxt);
+        checkPiece(piece);
     }
 
-    private boolean checkPiece(char piece) {
-        if (Character.toLowerCase(piece) == Symbol.KING.getName(Team.WHITE)) {
-            return new King().isMoveable(source, target);
-        } else if (Character.toLowerCase(piece) == Symbol.QUEEN.getName(Team.WHITE)) {
-            return new Queen().isMoveable(source, target);
-        } else if (Character.toLowerCase(piece) == Symbol.ROOK.getName(Team.WHITE)) {
-            return new Rook().isMoveable(source, target);
-        } else if (Character.toLowerCase(piece) == Symbol.BISHOP.getName(Team.WHITE)) {
-            return new Bishop().isMoveable(source, target);
-        } else if (Character.toLowerCase(piece) == Symbol.KNIGHT.getName(Team.WHITE)) {
-            return new Knight().isMoveable(source, target);
-        } else if (Character.toLowerCase(piece) == Symbol.PAWN.getName(Team.WHITE)) {
-            return new Pawn().isMoveable(source, target);
-        }
-        return false;
+    private boolean checkPiece(Piece piece) {
+        return piece.isMoveable(source, target);
     }
 }

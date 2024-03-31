@@ -17,13 +17,9 @@ public class Knight implements Piece {
     public static final int MIN_MOVEABLE_SPACES = 1;
 
     public static void setDefaultPosition(Location location, Map<Location, Character> positions) {
-        if (location.getLocation().equals(BLACK_DEFAULT_LOCATION_ONE)) {
+        if (location.getLocation().equals(BLACK_DEFAULT_LOCATION_ONE) || location.getLocation().equals(BLACK_DEFAULT_LOCATION_TWO)) {
             positions.put(location, Symbol.KNIGHT.getName(Team.BLACK));
-        } else if (location.getLocation().equals(BLACK_DEFAULT_LOCATION_TWO)) {
-            positions.put(location, Symbol.KNIGHT.getName(Team.BLACK));
-        } else if (location.getLocation().equals(WHITE_DEFAULT_LOCATION_ONE)) {
-            positions.put(location, Symbol.KNIGHT.getName(Team.WHITE));
-        } else if (location.getLocation().equals(WHITE_DEFAULT_LOCATION_TWO)) {
+        } else if (location.getLocation().equals(WHITE_DEFAULT_LOCATION_ONE) || location.getLocation().equals(WHITE_DEFAULT_LOCATION_TWO)) {
             positions.put(location, Symbol.KNIGHT.getName(Team.WHITE));
         }
     }

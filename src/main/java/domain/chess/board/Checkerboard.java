@@ -30,7 +30,7 @@ public class Checkerboard {
 
     public static void isCheckable(Location source, Location target) {
         Team team = Team.getTeam(positions.get(source));
-        Checkerboard.removePiece(source, team, target);
+        removePiece(source, team, target);
     }
 
     public static void printDefaultCheckerboard(Map<Location, Character> positions) {

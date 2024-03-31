@@ -2,9 +2,7 @@ package domain;
 
 import camp.nextstep.edu.missionutils.Console;
 import domain.chess.Move;
-import domain.chess.board.Checkerboard;
 import domain.chess.board.Location;
-import domain.user.Player;
 
 public class Input {
 
@@ -24,11 +22,9 @@ public class Input {
         System.out.println(START_INPUT_INFO);
         System.out.println(END_INPUT_INFO);
         System.out.println(MOVE_INPUT_INFO);
-        inputLine();
     }
 
-    public String inputLine() {
-        String line = readLine();
+    public String inputLine(String line) {
         try {
             validateInput(line);
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -39,19 +35,13 @@ public class Input {
         return line;
     }
 
-    private String readLine() {
+    public String readLine() {
         return Console.readLine();
     }
 
     private void validateInput(String line) {
-        if (START_COMMAND.equals(line)) {
-            new Player().setDefaultPosition();
-        } else if (END_COMMAND.equals(line)) {
-            return;
-        } else if (line.matches(MOVE_COMMAND_REGULAR_EXPRESSION)) {
+        if (line.matches(MOVE_COMMAND_REGULAR_EXPRESSION)) {
             validateMoveCommand(line);
-        } else if (STATUS_COMMAND.equals(line)) {
-            Checkerboard.printDefaultCheckerboard(Checkerboard.positions);
         } else {
             throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
         }
