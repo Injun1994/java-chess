@@ -1,22 +1,23 @@
 package domain.chess.board.attribute;
 
-import java.util.stream.Stream;
-
 public enum File {
 
-    a,
-    b,
-    c,
-    d,
-    e,
-    f,
-    g,
-    h;
+    A('a'),
+    B('b'),
+    C('c'),
+    D('d'),
+    E('e'),
+    F('f'),
+    G('g'),
+    H('h');
 
-    public static File getFile(char fileName) {
-        return Stream.of(File.values())
-                .filter(file -> file.name().charAt(0) == fileName)
-                .findFirst()
-                .orElse(null);
+    private final char fileName;
+
+    File(char fileName) {
+        this.fileName = fileName;
+    }
+
+    public char getFileName() {
+        return fileName;
     }
 }

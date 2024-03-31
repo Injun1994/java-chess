@@ -9,7 +9,7 @@ import domain.chess.piece.attribute.Team;
 
 import java.util.Map;
 
-public class Queen {
+public class Queen implements Piece {
 
     public static final String BLACK_DEFAULT_LOCATION = "d8";
     public static final String WHITE_DEFAULT_LOCATION = "d1";
@@ -22,6 +22,7 @@ public class Queen {
         }
     }
 
+    @Override
     public boolean isMoveable(Location source, Location target) {
         MoveDiagonally moveDiagonally = new MoveDiagonally();
         MoveHorizontalOrVertical moveHorizontalOrVertical = new MoveHorizontalOrVertical();

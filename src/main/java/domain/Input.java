@@ -17,6 +17,7 @@ public class Input {
     public static final String END_INPUT_INFO = "> 게임 종료 : " + END_COMMAND;
     public static final String MOVE_INPUT_INFO = "> 게임 이동 : move source위치 target위치 - 예. move b2 b3";
     public static final String INPUT_ERROR_MESSAGE = "[ERROR] start, end, move(예. move b2 b3) 를 입력하세요.";
+    public static final String MOVE_COMMAND_ERROR_MESSAGE = "[ERROR] move source위치와 target위치는 달라야 합니다.";
 
     public void inputInfo() {
         System.out.println(START_INFO);
@@ -47,12 +48,19 @@ public class Input {
             new Player().setDefaultPosition();
         } else if (END_COMMAND.equals(line)) {
             return;
-        } else if (line.matches(MOVE_COMMAND_REGULAR_EXPRESSION) && !line.split(" ")[1].equals(line.split(" ")[2])) {
-            new Move(Location.getLocation(line.split(" ")[1]), Location.getLocation(line.split(" ")[2])).getPiece();
+        } else if (line.matches(MOVE_COMMAND_REGULAR_EXPRESSION)) {
+            validateMoveCommand(line);
         } else if (STATUS_COMMAND.equals(line)) {
             Checkerboard.printDefaultCheckerboard(Checkerboard.positions);
         } else {
             throw new IllegalArgumentException(INPUT_ERROR_MESSAGE);
         }
+    }
+
+    private void validateMoveCommand(String line) {
+        if (line.split(" ")[1].equals(line.split(" ")[2])) {
+            throw new IllegalArgumentException(MOVE_COMMAND_ERROR_MESSAGE);
+        }
+        new Move(Location.getLocation(line.split(" ")[1]).get(), Location.getLocation(line.split(" ")[2]).get()).getPiece();
     }
 }

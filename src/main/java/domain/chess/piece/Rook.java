@@ -1,6 +1,5 @@
 package domain.chess.piece;
 
-import domain.chess.Move;
 import domain.chess.MoveHorizontalOrVertical;
 import domain.chess.board.Checkerboard;
 import domain.chess.board.Location;
@@ -9,7 +8,7 @@ import domain.chess.piece.attribute.Team;
 
 import java.util.Map;
 
-public class Rook {
+public class Rook implements Piece {
 
     public static final String BLACK_DEFAULT_LOCATION_ONE = "a8";
     public static final String BLACK_DEFAULT_LOCATION_TWO = "h8";
@@ -28,13 +27,8 @@ public class Rook {
         }
     }
 
-    public void isMoveable(Location source, Location target) {
-        if (source.getFileName() == target.getFileName() || source.getRankNumber() == target.getRankNumber()) {
-            isNoPieceOnTheWay(source, target);
-        }
-    }
-
-    public boolean isNoPieceOnTheWay(Location source, Location target) {
+    @Override
+    public boolean isMoveable(Location source, Location target) {
         if (new MoveHorizontalOrVertical().checkWayToGo(source, target)) {
             Checkerboard.isCheckable(source, target);
             return true;

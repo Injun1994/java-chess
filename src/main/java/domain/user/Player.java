@@ -28,7 +28,7 @@ public class Player {
         for (File file : File.values()) {
             for (Rank rank : Rank.values()) {
                 if (rank.getNumber() >= EMPTY_POSITION_START_RANK && rank.getNumber() <= EMPTY_POSITION_END_RANK) {
-                    if (location.getLocation().equals(file.name() + rank.getNumber())) {
+                    if (location.getLocation().equals(file.name().toLowerCase() + rank.getNumber())) {
                         Checkerboard.positions.put(location, Checkerboard.NONE);
                     }
                 }

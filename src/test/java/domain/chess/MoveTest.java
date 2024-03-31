@@ -1,7 +1,5 @@
 package domain.chess;
 
-
-import domain.chess.board.Checkerboard;
 import domain.chess.board.Location;
 import domain.chess.board.attribute.File;
 import domain.chess.board.attribute.Rank;
@@ -26,7 +24,7 @@ class MoveTest {
     void isInRangeOfFile() {
         boolean result = false;
         char fileName = 'i';
-        if (fileName >= File.a.name().charAt(0) && fileName <= File.h.name().charAt(0)) {
+        if (fileName >= Character.toLowerCase(File.A.name().charAt(0)) && fileName <= Character.toLowerCase(File.H.name().charAt(0))) {
             result = true;
         }
         Assertions.assertFalse(result);

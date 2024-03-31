@@ -3,16 +3,15 @@ package domain.chess.board;
 import domain.chess.board.attribute.File;
 import domain.chess.board.attribute.Rank;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Location {
+
+    private static final List<Location> locations = new ArrayList<>();
 
     private final String locationTxt;
     private final char fileName;
     private final int rankNumber;
-    private static final List<Location> locations = new ArrayList<>();
 
     public Location(String locationTxt) {
         this.locationTxt = locationTxt;
@@ -23,23 +22,26 @@ public class Location {
     public static List<Location> getLocations() {
         for (Rank rank : Rank.values()) {
             for (File file : File.values()) {
-                locations.add(new Location(file.name() + rank.getNumber()));
+                locations.add(new Location(file.name().toLowerCase() + rank.getNumber()));
             }
         }
         return Collections.unmodifiableList(locations);
     }
 
-    public static Location getLocation(String locationTxt) {
-        for (Location location : Location.getLocations()) {
-            if (location.getLocation().equals(locationTxt)) {
-                return location;
-            }
-        }
-        return null;
+    public static Optional<Location> getLocation(String locationTxt) {
+        return Location.getLocations().stream()
+                .filter(location -> location.getLocation().equals(locationTxt))
+                .findFirst();
     }
 
     public String getLocation() {
         return locationTxt;
+    }
+
+    public Optional<File> getFile() {
+        return Arrays.stream(File.values())
+                .filter(file -> Character.toLowerCase(file.name().charAt(0)) == fileName)
+                .findFirst();
     }
 
     public char getFileName() {

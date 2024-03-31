@@ -12,13 +12,14 @@ public class MoveHorizontalOrVertical {
             } else {
                 return true;
             }
-        } else {
+        } else if (source.getRankNumber() == target.getRankNumber()) {
             if (Math.abs(target.getFileName() - source.getFileName()) > 1) {
                 return checkHorizontalWay(source, target);
             } else {
                 return true;
             }
         }
+        return false;
     }
 
     public boolean checkHorizontalWay(Location source, Location target) {
@@ -27,7 +28,7 @@ public class MoveHorizontalOrVertical {
         for (int i = 1; i < Math.abs(target.getFileName() - source.getFileName()); i++) {
             char file = (char) (minNumber + i);
             String way = String.valueOf(file) + source.getRankNumber();
-            if (Checkerboard.positions.get(Location.getLocation(way)) != Checkerboard.NONE) {
+            if (Checkerboard.positions.get(Location.getLocation(way).get()) != Checkerboard.NONE) {
                 return false;
             }
         }
@@ -39,7 +40,7 @@ public class MoveHorizontalOrVertical {
 
         for (int i = 1; i < Math.abs(target.getRankNumber() - source.getRankNumber()); i++) {
             String way = String.valueOf(source.getFileName()) + (minNumber + i);
-            if (Checkerboard.positions.get(Location.getLocation(way)) != Checkerboard.NONE) {
+            if (Checkerboard.positions.get(Location.getLocation(way).get()) != Checkerboard.NONE) {
                 return false;
             }
         }

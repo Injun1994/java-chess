@@ -7,7 +7,7 @@ import domain.chess.piece.attribute.Team;
 
 import java.util.Map;
 
-public class Knight {
+public class Knight implements Piece {
 
     public static final String BLACK_DEFAULT_LOCATION_ONE = "b8";
     public static final String BLACK_DEFAULT_LOCATION_TWO = "g8";
@@ -28,6 +28,7 @@ public class Knight {
         }
     }
 
+    @Override
     public boolean isMoveable(Location source, Location target) {
         boolean isMoveable = false;
 

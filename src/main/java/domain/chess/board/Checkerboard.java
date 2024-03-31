@@ -1,6 +1,5 @@
 package domain.chess.board;
 
-
 import domain.Score;
 import domain.chess.Move;
 import domain.chess.board.attribute.File;
@@ -25,7 +24,7 @@ public class Checkerboard {
             positions.put(target, positions.get(source));
             positions.put(source, NONE);
         }
-        Score.getScore(team);
+        Score.calculate(team);
         if (isCheckmate(piece)) return;
     }
 
@@ -41,7 +40,7 @@ public class Checkerboard {
             }
         }
         System.out.println();
-        Arrays.stream(File.values()).forEach(file -> System.out.print(file.name()));
+        Arrays.stream(File.values()).forEach(file -> System.out.print(file.name().toLowerCase()));
     }
 
     public static boolean isCheckmate(char piece) {

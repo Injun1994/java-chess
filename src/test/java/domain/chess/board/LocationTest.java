@@ -33,7 +33,7 @@ class LocationTest {
         List<Location> locations = new ArrayList<>();
         for (Rank rank : Rank.values()) {
             for (File file : File.values()) {
-                locations.add(new Location(file.name() + rank.getNumber()));
+                locations.add(new Location(file.name().toLowerCase() + rank.getNumber()));
             }
         }
         assertThat(locations.size()).isEqualTo(64);

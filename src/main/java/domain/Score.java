@@ -21,7 +21,7 @@ public class Score {
     private static final int PAWN_SCORE = 1;
     private static final double PAWN_SCORE_AT_SAME_FILE = 0.5;
 
-    public static void getScore(Team team) {
+    public static void calculate(Team team) {
         double score = 0;
         List<File> pawns = new ArrayList<>();
         for (Location location : Checkerboard.positions.keySet()) {
@@ -35,13 +35,13 @@ public class Score {
             } else if (Symbol.KNIGHT.getName(team) == piece) {
                 score += KNIGHT_SCORE;
             } else if (Symbol.PAWN.getName(team) == piece) {
-                pawns.add(File.getFile(location.getFileName()));
+                pawns.add(location.getFile().get());
             }
         }
-        printScore(team, score + getScoreOfPawns(pawns));
+        print(team, score + getScoreOfPawns(pawns));
     }
 
-    private static void printScore(Team team, double score) {
+    private static void print(Team team, double score) {
         System.out.println(team.name() + " : " + score);
     }
 

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class KnightTest {
 
     @Test
-    void isMoveable() {
+    void isMoveable_참() {
         Location source = new Location("b2");
         Location target = new Location("a4");
         boolean isMoveable = false;
@@ -19,6 +19,20 @@ class KnightTest {
             isMoveable = true;
         }
         Assertions.assertTrue(isMoveable);
+    }
+
+    @Test
+    void isMoveable_거짓() {
+        Location source = new Location("b2");
+        Location target = new Location("b4");
+        boolean isMoveable = false;
+
+        if (Math.abs(target.getFileName() - source.getFileName()) == Knight.MAX_MOVEABLE_SPACES && Math.abs(target.getRankNumber() - source.getRankNumber()) == Knight.MIN_MOVEABLE_SPACES) {
+            isMoveable = true;
+        } else if (Math.abs(target.getFileName() - source.getFileName()) == Knight.MIN_MOVEABLE_SPACES && Math.abs(target.getRankNumber() - source.getRankNumber()) == Knight.MAX_MOVEABLE_SPACES) {
+            isMoveable = true;
+        }
+        Assertions.assertFalse(isMoveable);
     }
 
 }

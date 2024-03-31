@@ -9,7 +9,7 @@ import domain.chess.piece.attribute.Team;
 
 import java.util.Map;
 
-public class Bishop {
+public class Bishop implements Piece {
 
     public static final String BLACK_DEFAULT_LOCATION_ONE = "c8";
     public static final String BLACK_DEFAULT_LOCATION_TWO = "f8";
@@ -28,10 +28,12 @@ public class Bishop {
         }
     }
 
-    public void isMoveable(Location source, Location target) {
+    @Override
+    public boolean isMoveable(Location source, Location target) {
         if (Move.isDiagonal(source, target)) {
-            isNoPieceOnTheWay(source, target);
+            return isNoPieceOnTheWay(source, target);
         }
+        return false;
     }
 
     public boolean isNoPieceOnTheWay(Location source, Location target) {

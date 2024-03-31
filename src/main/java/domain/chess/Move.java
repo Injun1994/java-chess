@@ -37,7 +37,7 @@ public class Move {
     }
 
     public static boolean isInRangeOfFile(char fileName) {
-        if (fileName >= File.a.name().charAt(0) && fileName <= File.h.name().charAt(0)) {
+        if (fileName >= File.A.getFileName() && fileName <= File.H.getFileName()) {
             return true;
         }
         return false;
@@ -65,19 +65,20 @@ public class Move {
         }
     }
 
-    private void checkPiece(char piece) {
+    private boolean checkPiece(char piece) {
         if (Character.toLowerCase(piece) == Symbol.KING.getName(Team.WHITE)) {
-            new King().isMoveable(source, target);
+            return new King().isMoveable(source, target);
         } else if (Character.toLowerCase(piece) == Symbol.QUEEN.getName(Team.WHITE)) {
-            new Queen().isMoveable(source, target);
+            return new Queen().isMoveable(source, target);
         } else if (Character.toLowerCase(piece) == Symbol.ROOK.getName(Team.WHITE)) {
-            new Rook().isMoveable(source, target);
+            return new Rook().isMoveable(source, target);
         } else if (Character.toLowerCase(piece) == Symbol.BISHOP.getName(Team.WHITE)) {
-            new Bishop().isMoveable(source, target);
+            return new Bishop().isMoveable(source, target);
         } else if (Character.toLowerCase(piece) == Symbol.KNIGHT.getName(Team.WHITE)) {
-            new Knight().isMoveable(source, target);
+            return new Knight().isMoveable(source, target);
         } else if (Character.toLowerCase(piece) == Symbol.PAWN.getName(Team.WHITE)) {
-            new Pawn().isMoveable(source, target);
+            return new Pawn().isMoveable(source, target);
         }
+        return false;
     }
 }

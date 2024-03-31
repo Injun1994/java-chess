@@ -22,7 +22,7 @@ public class MoveDiagonally { // From source To target
         for (int i = 1; i < target.getFileName() - source.getFileName(); i++) {
             char file = (char) (source.getFileName() + i);
             String way = String.valueOf(file) + (source.getRankNumber() + i);
-            if (Checkerboard.positions.get(Location.getLocation(way)) != Checkerboard.NONE) {
+            if (Checkerboard.positions.get(Location.getLocation(way).get()) != Checkerboard.NONE) {
                 return false;
             }
         }
@@ -41,27 +41,24 @@ public class MoveDiagonally { // From source To target
     }
 
     public boolean increaseFileDecreaseRank(Location source, Location target) {
-        for (int i = 1; i < target.getFileName() - source.getFileName(); i++) {
-            for (int j = source.getRankNumber() - 1; j > target.getRankNumber(); j--) {
-                char file = (char) (source.getFileName() + i);
-                String way = String.valueOf(file) + j;
-                if (Checkerboard.positions.get(Location.getLocation(way)) != Checkerboard.NONE) {
-                    return false;
-                }
+        for (int i = 1; i <= target.getFileName() - source.getFileName(); i++) {
+            char file = (char) (source.getFileName() + i);
+            String way = String.valueOf(file) + (source.getRankNumber() - i);
+            if (Checkerboard.positions.get(Location.getLocation(way).get()) != Checkerboard.NONE) {
+                return false;
             }
         }
         return true;
     }
 
     public boolean decreaseFileIncreaseRank(Location source, Location target) {
-        for (int i = 1; i < target.getRankNumber() - source.getRankNumber(); i++) {
-            for (int j = source.getFileName() - 1; j > target.getFileName(); j--) {
-                char file = (char) j;
-                String way = String.valueOf(file) + (source.getRankNumber() + i);
-                if (Checkerboard.positions.get(Location.getLocation(way)) != Checkerboard.NONE) {
-                    return false;
-                }
+        for (int i = 1; i <= target.getRankNumber() - source.getRankNumber(); i++) {
+            char file = (char) (source.getFileName() - i);
+            String way = String.valueOf(file) + (source.getRankNumber() + i);
+            if (Checkerboard.positions.get(Location.getLocation(way).get()) != Checkerboard.NONE) {
+                return false;
             }
+
         }
         return true;
     }
