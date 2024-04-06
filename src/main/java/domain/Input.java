@@ -51,6 +51,6 @@ public class Input {
         if (line.split(" ")[1].equals(line.split(" ")[2])) {
             throw new IllegalArgumentException(MOVE_COMMAND_ERROR_MESSAGE);
         }
-        new Move(Location.getLocation(line.split(" ")[1]).get(), Location.getLocation(line.split(" ")[2]).get()).getPiece();
+        Move.setPieceTxt(Location.getLocation(line.split(" ")[1]).get(), Location.getLocation(line.split(" ")[2]).get());
     }
 }

@@ -69,19 +69,21 @@ public class Move {
         return false;
     }
 
-    public void getPiece() {
+    public static void setPieceTxt(Location source, Location target) {
+        Move move = new Move(source, target);
+
         char pieceTxt = Checkerboard.NONE;
         for (Location location : Checkerboard.positions.keySet()) {
             if (location.getLocation().equals(source.getLocation())) {
                 pieceTxt = Checkerboard.positions.get(location);
-                 break;
+                break;
             }
         }
-        setPiece(pieceTxt);
-        checkPiece(piece);
+        move.setPiece(pieceTxt);
+        move.checkPiece();
     }
 
-    private boolean checkPiece(Piece piece) {
-        return piece.isMoveable(source, target);
+    private void checkPiece() {
+        piece.isMoveable(source, target);
     }
 }

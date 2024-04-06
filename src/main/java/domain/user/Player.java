@@ -1,5 +1,6 @@
 package domain.user;
 
+import domain.Output;
 import domain.chess.board.Checkerboard;
 import domain.chess.board.Location;
 import domain.chess.board.attribute.File;
@@ -11,7 +12,7 @@ public class Player {
     private static final int EMPTY_POSITION_START_RANK = 3;
     private static final int EMPTY_POSITION_END_RANK = 6;
 
-    public void setDefaultPosition() {
+    public static void setDefaultPosition() {
         for (Location location : Location.getLocations()) {
             King.setDefaultPosition(location, Checkerboard.positions);
             Queen.setDefaultPosition(location, Checkerboard.positions);
@@ -21,10 +22,10 @@ public class Player {
             Pawn.setDefaultPosition(location, Checkerboard.positions);
             setEmptyPosition(location);
         }
-        Checkerboard.printDefaultCheckerboard(Checkerboard.positions);
+        Output.printDefaultCheckerboard(Checkerboard.positions);
     }
 
-    private void setEmptyPosition(Location location) {
+    private static void setEmptyPosition(Location location) {
         for (File file : File.values()) {
             for (Rank rank : Rank.values()) {
                 if (rank.getNumber() >= EMPTY_POSITION_START_RANK && rank.getNumber() <= EMPTY_POSITION_END_RANK) {

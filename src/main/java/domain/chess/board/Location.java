@@ -7,6 +7,9 @@ import java.util.*;
 
 public class Location {
 
+    public static final String LOCATION_CONSTRUCTOR_ERROR = "[ERROR] a~h, 1~8까지 생성 가능합니다.";
+    public static final String LOCATION_REGULAR_EXPRESSION = "[a-h]{1}[1-8]{1}";
+
     private static final List<Location> locations = new ArrayList<>();
 
     private final String locationTxt;
@@ -14,6 +17,9 @@ public class Location {
     private final int rankNumber;
 
     public Location(String locationTxt) {
+        if (!validate(locationTxt)) {
+            throw new IllegalArgumentException(LOCATION_CONSTRUCTOR_ERROR);
+        }
         this.locationTxt = locationTxt;
         this.fileName = locationTxt.charAt(0);
         this.rankNumber = Integer.parseInt(locationTxt.substring(1, 2));
@@ -50,5 +56,9 @@ public class Location {
 
     public int getRankNumber() {
         return rankNumber;
+    }
+
+    private boolean validate(String locationTxt) {
+        return locationTxt.matches(LOCATION_REGULAR_EXPRESSION);
     }
 }

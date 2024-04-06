@@ -38,11 +38,7 @@ public class Score {
                 pawns.add(location.getFile().get());
             }
         }
-        print(team, score + getScoreOfPawns(pawns));
-    }
-
-    private static void print(Team team, double score) {
-        System.out.println(team.name() + " : " + score);
+        Output.printScore(team, score + getScoreOfPawns(pawns));
     }
 
     private static double getScoreOfPawns(List<File> pawns) {

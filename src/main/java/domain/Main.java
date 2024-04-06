@@ -11,9 +11,9 @@ public class Main {
         while (true) {
             String line = input.readLine();
             if (Input.START_COMMAND.equals(line)) {
-                new Player().setDefaultPosition();
+                Player.setDefaultPosition();
             } else if (Input.STATUS_COMMAND.equals(line)) {
-                Checkerboard.printDefaultCheckerboard(Checkerboard.positions);
+                Output.printDefaultCheckerboard(Checkerboard.positions);
             } else if (Input.END_COMMAND.equals(line)) {
                 break;
             } else {
